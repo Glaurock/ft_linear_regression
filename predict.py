@@ -6,9 +6,8 @@ import data
 
 def main():
     if len(sys.argv) != 2:
-        print('Usage...')
+        print('%s [datafile.csv]' % (sys.argv[0]))
         sys.exit(1)
-
 
     while True:
         try:
@@ -32,10 +31,7 @@ def main():
     ret = dat.estimate_result(var)
     if ret < 0:
         ret = 0
-    if ret == 0:
-        print("Your car worth nothing, just get rid of it !")
-    else:
-        print('We estimate you car to %.f' % ret)
+    print('We estimate you car to %.f' % ret)
 
 if __name__ == "__main__":
     main()
