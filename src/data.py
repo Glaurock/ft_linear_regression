@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    data.py                                            :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/11/16 20:21:51 by gmonnier          #+#    #+#              #
+#    Updated: 2018/11/16 20:21:52 by gmonnier         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 import numpy as np
 import matplotlib.pyplot as plt
 import csv
@@ -40,6 +52,7 @@ class Data:
         plt.scatter(self.x, self.y)
         plt.xlabel(self.label_1)
         plt.ylabel(self.label_2)
+        plt.title("Price of a car according to its mileage")
         plt.show()
 
     def draw_line(self):
@@ -48,6 +61,7 @@ class Data:
         plt.xlabel(self.label_1)
         plt.ylabel(self.label_2)
         plt.plot(self.x, line_values, 'r')
+        plt.title("Price of a car according to its mileage with learned curve")
         plt.show()
 
     def feature_scaling(self):
@@ -102,3 +116,6 @@ class Data:
             print('No learning parameters found, please run learning.py first')
         except Exception as e:
             print(e)
+
+    def get_accuracy(self):
+        print(self.data)
