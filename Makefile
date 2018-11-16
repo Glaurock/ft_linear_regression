@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/16 20:22:14 by gmonnier          #+#    #+#              #
-#    Updated: 2018/11/16 20:23:07 by gmonnier         ###   ########.fr        #
+#    Updated: 2018/11/16 20:31:05 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,9 @@ learning:
 
 predict:
 	python3 src/predict.py resources/data.csv
+
+accuracy:
+	python3 src/accuracy.py resources/data.csv
 
 clean:
 	rm -rf __pycache__

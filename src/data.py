@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/16 20:21:51 by gmonnier          #+#    #+#              #
-#    Updated: 2018/11/16 20:21:52 by gmonnier         ###   ########.fr        #
+#    Updated: 2018/11/16 20:42:15 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,4 +118,9 @@ class Data:
             print(e)
 
     def get_accuracy(self):
-        print(self.data)
+        accuracies = []
+        for value in self.data:
+            res = self.estimate_result(value[0])
+            va = float(value[1])
+            accuracies.append(abs(((va - res) / va) * 100))
+        return (100 - (sum(accuracies) / len(accuracies)))
