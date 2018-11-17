@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/16 20:21:51 by gmonnier          #+#    #+#              #
-#    Updated: 2018/11/17 09:23:25 by gmonnier         ###   ########.fr        #
+#    Updated: 2018/11/17 09:33:32 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,14 +23,14 @@ def denormalize(x, min, max):
 
 class Data:
 
-    def __init__(self, arg=None, delimiter=None, n_epoch=1000, alpha=0.1):
+    def __init__(self, arg=None, delimiter=None, alpha=0.1, n_epoch=1000):
         if arg is not None and delimiter is not None:
             self.data = self.get_data(arg, delimiter)
             self.epur_data()
         self.theta0 = 0.0
         self.theta1 = 0.0
-        self.alpha = alpha
-        self.n_epoch = n_epoch
+        self.alpha = alpha if alpha is not None and alpha > 0.0 else 0.1
+        self.n_epoch = n_epoch if n_epoch is not None and n_epoch > 0 else 1000
         self.mse_curve = []
 
     def get_data(self, arg, delimiter):
