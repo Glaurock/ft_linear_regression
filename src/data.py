@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/16 20:21:51 by gmonnier          #+#    #+#              #
-#    Updated: 2018/11/16 20:42:15 by gmonnier         ###   ########.fr        #
+#    Updated: 2018/11/17 09:23:25 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,12 +23,15 @@ def denormalize(x, min, max):
 
 class Data:
 
-    def __init__(self, arg=None, delimiter=None):
+    def __init__(self, arg=None, delimiter=None, n_epoch=1000, alpha=0.1):
         if arg is not None and delimiter is not None:
             self.data = self.get_data(arg, delimiter)
             self.epur_data()
         self.theta0 = 0.0
         self.theta1 = 0.0
+        self.alpha = alpha
+        self.n_epoch = n_epoch
+        self.mse_curve = []
 
     def get_data(self, arg, delimiter):
         try:
@@ -64,6 +67,14 @@ class Data:
         plt.title("Price of a car according to its mileage with learned curve")
         plt.show()
 
+    def display_gradient_descent(self):
+        x_values = np.arange(0, self.n_epoch)
+        plt.title("Mean squarred error")
+        plt.xlabel("Number of epoch")
+        plt.ylabel("Error")
+        plt.plot(x_values, self.mse_curve)
+        plt.show()
+
     def feature_scaling(self):
         self.x_norm = normalize(self.x, self.x.min(), self.x.max())
         self.y_norm = normalize(self.y, self.y.min(), self.y.max())
@@ -83,20 +94,23 @@ class Data:
         m = self.x_norm.shape[0]
         sum0 = 0
         sum1 = 0
+        mse = 0
         for i in range(m):
             sum0 += self.estimate(self.x_norm[i]) - self.y_norm[i]
             sum1 += (self.estimate(self.x_norm[i]) - self.y_norm[i]) * self.x_norm[i]
-        return [sum0, sum1]
+            mse += (self.estimate(self.x_norm[i]) - self.y_norm[i]) ** 2
+        return [sum0, sum1, mse]
 
-    def gradient_descent(self, alpha, iter):
+    def gradient_descent(self):
         m = self.x_norm.shape[0]
         a = self.theta0
         b = self.theta1
 
-        for i in range(iter):
-            sum0, sum1 = self.calc_sum()
-            self.theta0 -= alpha * sum0 / m
-            self.theta1 -= alpha * sum1 / m
+        for i in range(self.n_epoch):
+            sum0, sum1, mse = self.calc_sum()
+            self.theta0 -= self.alpha * sum0 / m
+            self.theta1 -= self.alpha * sum1 / m
+            self.mse_curve.append(mse / m)
 
     def write_thetas(self):
         try:
