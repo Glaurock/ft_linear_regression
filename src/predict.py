@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/16 20:21:49 by gmonnier          #+#    #+#              #
-#    Updated: 2018/11/16 20:28:38 by gmonnier         ###   ########.fr        #
+#    Updated: 2018/11/16 21:27:04 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ def predict():
             if var < 0:
                 print("A car can't have a negativ mileage, you fool !")
             elif var > 500000:
-                print("Have you ever seen a car with %.f miles??!" % var)
+                print("Have you ever seen a car with so much miles??!")
             else:
                 break
 
